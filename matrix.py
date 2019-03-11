@@ -9,14 +9,25 @@ z0  z1  ... zn
 """
 import math
 
+#make product matrices
 def make_bezier():
-    pass
+    return [ [-1,3,-3,1],[3,-6,3,0],[-3,3,0,0],[1,0,0,0] ]
 
 def make_hermite():
-    pass
+    return [ [2,-2,1,1],[-3,3,-2,-1],[0,0,1,0],[1,0,0,0] ]
 
+#t is type, perform product w points and matrix
 def generate_curve_coefs( p1, p2, p3, p4, t ):
-    pass
+    temp = [[p1],[p2],[p3],[p4]]
+    if t == "bezier":
+        B = make_bezier()
+        matrix_mult(B,temp)
+    elif t == "hermite":
+        H = make_hermite()
+        #continute
+    else:
+        print "bad"
+
 
 
 def make_translate( x, y, z ):

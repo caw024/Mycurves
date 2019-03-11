@@ -1,12 +1,26 @@
 from display import *
 from matrix import *
+import math
 
 
 def add_circle( points, cx, cy, cz, r, step ):
-    pass
+    t = 0
+    while t < 1:
+        x = r*math.cos(2*math.pi*t) + cx
+        nextx = r*math.cos(2*math.pi*(t+step)) + cx
+        y = r*math.sin(2*math.pi*t) + cy
+        nexty = r*math.sin(2*math.pi*(t+step)) + cy
+        add_edge(points,int(x),int(y),int(cz),int(nextx),int(nexty),int(cz))
+        t += step
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
-    pass
+    generate_coefficients()
+    if curve_type == "bezier":
+        generate_curve_coefs( x0, x1, x2, x3, curve_type )
+    elif curve_type = "hermite":
+        generate_curve_coefs( x0, x1, x2, x3, curve_type )
+    else:
+        print "not a known curve"
 
 
 def draw_lines( matrix, screen, color ):
