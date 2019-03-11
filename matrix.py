@@ -18,12 +18,15 @@ def make_hermite():
 
 #t is type, perform product w points and matrix
 def generate_curve_coefs( p1, p2, p3, p4, t ):
-    temp = [[p1],[p2],[p3],[p4]]
+    temp = [[p1,p2,p3,p4]]
     if t == "bezier":
         B = make_bezier()
         matrix_mult(B,temp)
+        return temp
     elif t == "hermite":
         H = make_hermite()
+        matrix_mult(H,temp)
+        return temp
         #continute
     else:
         print "bad"

@@ -10,17 +10,24 @@ def add_circle( points, cx, cy, cz, r, step ):
         nextx = r*math.cos(2*math.pi*(t+step)) + cx
         y = r*math.sin(2*math.pi*t) + cy
         nexty = r*math.sin(2*math.pi*(t+step)) + cy
-        add_edge(points,int(x),int(y),int(cz),int(nextx),int(nexty),int(cz))
+        add_edge(points,x,y,cz,nextx,nexty,cz)
         t += step
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
-    generate_coefficients()
-    if curve_type == "bezier":
-        generate_curve_coefs( x0, x1, x2, x3, curve_type )
-    elif curve_type = "hermite":
-        generate_curve_coefs( x0, x1, x2, x3, curve_type )
-    else:
-        print "not a known curve"
+    X = generate_curve_coefs( x0, x1, x2, x3, curve_type )
+    Y = generate_curve_coefs( y0, y1, y2, y3, curve_type )
+    t = 0
+    while t < 1:
+        x = X[0][0] * t**3 + X[0][1] * t**2 + X[0][2] * t + X[0][3]
+        y = Y[0][0] * t**3 + Y[0][1] * t**2 + Y[0][2] * t + Y[0][3]
+        add_point(points,x,y,0)
+        t += step
+        x = X[0][0] * t**3 + X[0][1] * t**2 + X[0][2] * t + X[0][3]
+        y = Y[0][0] * t**3 + Y[0][1] * t**2 + Y[0][2] * t + Y[0][3]
+        add_point(points,x,y,0)
+     
+   
+    
 
 
 def draw_lines( matrix, screen, color ):
